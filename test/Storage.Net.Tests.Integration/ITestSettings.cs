@@ -73,6 +73,21 @@ namespace Storage.Net.Tests
 
       #endregion
 
+      #region Sftp
+
+      [Option(Alias = "Sftp.Hostname")]
+      string SftpHostName { get; }
+
+      [Option(Alias = "Sftp.Port")]
+      string SftpPort { get; }
+
+      [Option(Alias = "Sftp.Username")]
+      string SftpUsername { get; }
+
+      [Option(Alias = "Sftp.Password")]
+      string SftpPassword { get; }
+
+      #endregion
 
       #region [ MSSQL ]
 
