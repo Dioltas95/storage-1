@@ -138,6 +138,7 @@ namespace Storage.Net.Blobs
          return r.First();
       }
 
+
       /// <summary>
       /// Deletes a single blob or a folder recursively.
       /// </summary>

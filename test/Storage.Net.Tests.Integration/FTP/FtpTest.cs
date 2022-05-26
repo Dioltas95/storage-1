@@ -4,20 +4,19 @@ using System.Threading.Tasks;
 using Storage.Net.Blobs;
 using Xunit;
 
-namespace Storage.Net.Tests.Integration.SFTP
+namespace Storage.Net.Tests.Integration.FTP
 {
    [Trait("Category", "Blobs")]
-   public class SftpTest
+   public class FtpTest
    {
       private readonly ITestSettings _settings;
       private readonly IBlobStorage _storage;
 
-      public SftpTest()
+      public FtpTest()
       {
          _settings = Settings.Instance;
 
-         _storage = StorageFactory.Blobs.Sftp(new Renci.SshNet.ConnectionInfo(_settings.SftpHostName, _settings.SftpPort, new Renci.SshNet.PasswordAuthenticationMethod(_settings.SftpUsername, _settings.SftpPassword)));
-
+         _storage = StorageFactory.Blobs.FtpFromFluentFtpClient(new FluentFTP.FtpClient(_settings.FtpHostName, _settings.FtpPort, new System.Net.NetworkCredential(_settings.FtpUsername, _settings.FtpPassword)));
       }
 
       [Fact]

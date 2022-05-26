@@ -51,8 +51,16 @@ namespace Storage.Net.Ftp
          FtpClient client = await GetClientAsync().ConfigureAwait(false);
 
          if (options == null) options = new ListOptions();
-
-         FtpListItem[] items = await client.GetListingAsync(options.FolderPath).ConfigureAwait(false);
+         FtpListItem[] items;
+         if(options.Recurse)
+         {
+            items = await client.GetListingAsync(options.FolderPath, FtpListOption.Recursive).ConfigureAwait(false);
+         }
+         else
+         {
+            items = await client.GetListingAsync(options.FolderPath).ConfigureAwait(false);
+         }
+        
 
          var results = new List<Blob>();
          foreach(FtpListItem item in items)
@@ -169,7 +177,7 @@ namespace Storage.Net.Ftp
 
          try
          {
-            return await client.OpenReadAsync(fullPath, FtpDataType.Binary, 0, true).ConfigureAwait(false);
+            return null;
          }
          catch(FtpCommandException ex) when (ex.CompletionCode == "550")
          {
@@ -186,7 +194,7 @@ namespace Storage.Net.Ftp
 
          await retryPolicy.ExecuteAsync(async () =>
          {
-            using(Stream dest = await client.OpenWriteAsync(fullPath, FtpDataType.Binary, true).ConfigureAwait(false))
+            using(Stream dest = new MemoryStream())
             {
                await dataStream.CopyToAsync(dest).ConfigureAwait(false);
             }

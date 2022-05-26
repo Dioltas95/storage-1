@@ -264,7 +264,17 @@ namespace Storage.Net.Sftp
             .Select(ConvertSftpFileToBlob)
             .Where(options.BrowseFilter);
 
-         return blobCollection.ToList();
+         List<Blob> results = new List<Blob>();
+
+         foreach(Blob item in blobCollection)
+         {
+            if(item.IsFolder)
+            {
+               results.AddRange(await ListAsync(new ListOptions { FolderPath = item.FullPath, Recurse = options.Recurse }, cancellationToken));
+            }
+         }
+         results.AddRange(blobCollection);
+         return results;
       }
 
       /// <summary>

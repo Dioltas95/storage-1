@@ -9,7 +9,7 @@
    </PropertyGroup>
 
    <ItemGroup>
-      <PackageReference Include="FluentFTP" Version="28.0.5" />
+      <PackageReference Include="FluentFTP" Version="37.0.2" />
       <PackageReference Include="Polly" Version="7.2.0" />
    </ItemGroup>
 

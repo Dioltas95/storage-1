@@ -101,11 +101,15 @@ namespace Storage.Net.Tests
       [Option(Alias = "Ftp.Hostname")]
       string FtpHostName { get; }
 
+      [Option(Alias = "Ftp.Port")]
+      int FtpPort { get; }
+
       [Option(Alias = "Ftp.Username")]
       string FtpUsername { get; }
 
       [Option(Alias = "Ftp.Password")]
       string FtpPassword { get; }
+
 
       #endregion
 
