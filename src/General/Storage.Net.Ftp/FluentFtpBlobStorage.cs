@@ -171,7 +171,6 @@ namespace Storage.Net.Ftp
          throw new NotSupportedException();
       }
 
-      [Obsolete]
       public async Task<Stream> OpenReadAsync(string fullPath, CancellationToken cancellationToken = default)
       {
          FtpClient client = await GetClientAsync().ConfigureAwait(false);
@@ -187,7 +186,7 @@ namespace Storage.Net.Ftp
       }
 
       public Task<ITransaction> OpenTransactionAsync() => Task.FromResult(EmptyTransaction.Instance);
-      [Obsolete]
+
       public async Task WriteAsync(string fullPath, Stream dataStream,
          bool append = false, CancellationToken cancellationToken = default)
       {
