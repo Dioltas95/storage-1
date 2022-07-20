@@ -171,13 +171,14 @@ namespace Storage.Net.Ftp
          throw new NotSupportedException();
       }
 
+      [Obsolete]
       public async Task<Stream> OpenReadAsync(string fullPath, CancellationToken cancellationToken = default)
       {
          FtpClient client = await GetClientAsync().ConfigureAwait(false);
 
          try
          {
-            return null;
+            return await client.OpenReadAsync(fullPath, FtpDataType.Binary, 0, true).ConfigureAwait(false);
          }
          catch(FtpCommandException ex) when (ex.CompletionCode == "550")
          {
@@ -186,7 +187,7 @@ namespace Storage.Net.Ftp
       }
 
       public Task<ITransaction> OpenTransactionAsync() => Task.FromResult(EmptyTransaction.Instance);
-
+      [Obsolete]
       public async Task WriteAsync(string fullPath, Stream dataStream,
          bool append = false, CancellationToken cancellationToken = default)
       {
@@ -194,7 +195,7 @@ namespace Storage.Net.Ftp
 
          await retryPolicy.ExecuteAsync(async () =>
          {
-            using(Stream dest = new MemoryStream())
+            using(Stream dest = await client.OpenWriteAsync(fullPath, FtpDataType.Binary, true).ConfigureAwait(false))
             {
                await dataStream.CopyToAsync(dest).ConfigureAwait(false);
             }
