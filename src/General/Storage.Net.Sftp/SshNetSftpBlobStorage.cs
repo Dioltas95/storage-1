@@ -13,6 +13,9 @@ using Storage.Net.Blobs;
 
 namespace Storage.Net.Sftp
 {
+   /// <summary>
+   /// Class for Interacting with Storage via Sftp
+   /// </summary>
    public class SshNetSftpBlobStorage : IExtendedBlobStorage
    {
       /// <summary>
@@ -299,7 +302,7 @@ namespace Storage.Net.Sftp
             byte[] fileBytes = await Task.FromResult(Policy.Handle<Exception>().Retry(MaxRetryCount).Execute(() => client.ReadAllBytes(fullPath)));
             return new MemoryStream(fileBytes);
          }
-         catch (Exception /*exception*/)
+         catch (Exception)
          {
             return null;
          }

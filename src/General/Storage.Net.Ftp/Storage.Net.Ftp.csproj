@@ -5,9 +5,6 @@
       <LangVersion>latest</LangVersion>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <WarningsAsErrors />
-      <Version>1.1.0</Version>
-      <FileVersion>1.1.0.0</FileVersion>
-      <AssemblyVersion>1.1.0.0</AssemblyVersion>
       <Description>FTP bindings for Storage.Net</Description>
    </PropertyGroup>
 
