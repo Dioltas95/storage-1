@@ -77,5 +77,14 @@ namespace Storage.Net.Blobs
       /// </summary>
       /// <returns></returns>
       Task<ITransaction> OpenTransactionAsync();
+
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="oldPath"></param>
+      /// <param name="newPath"></param>
+      /// <param name="cancellationToken"></param>
+      /// <returns></returns>
+      Task<bool> MoveFileFluentAsync(string oldPath, string newPath, CancellationToken cancellationToken = default);
    }
 }

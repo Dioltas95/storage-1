@@ -229,7 +229,15 @@ namespace Storage.Net.Microsoft.Azure.DataLake.Store.Gen1
       {
          return Task.FromResult(EmptyTransaction.Instance);
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="oldPath"></param>
+      /// <param name="newPath"></param>
+      /// <param name="cancellationToken"></param>
+      /// <returns></returns>
+      /// <exception cref="NotImplementedException"></exception>
+      public Task<bool> MoveFileFluentAsync(string oldPath, string newPath, CancellationToken cancellationToken = default) => throw new NotImplementedException();
       #region [ IExtendedBlobStorage ]
 
       public async Task RenameAsync(string oldPath, string newPath, CancellationToken cancellationToken = default)

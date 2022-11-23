@@ -5,6 +5,9 @@
       <LangVersion>latest</LangVersion>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <WarningsAsErrors />
+      <Version>9.3.2-Mintra-23-11-22</Version>
+      <FileVersion>9.3.2.0</FileVersion>
+      <AssemblyVersion>9.0.0.0</AssemblyVersion>
       <Description>FTP bindings for Storage.Net</Description>
    </PropertyGroup>
 

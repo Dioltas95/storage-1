@@ -567,5 +567,14 @@ namespace Storage.Net.Microsoft.Azure.Storage.Blobs
 
          return (container, relativePath);
       }
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="oldPath"></param>
+      /// <param name="newPath"></param>
+      /// <param name="cancellationToken"></param>
+      /// <returns></returns>
+      /// <exception cref="NotImplementedException"></exception>
+      public Task<bool> MoveFileFluentAsync(string oldPath, string newPath, CancellationToken cancellationToken = default) => throw new NotImplementedException();
    }
 }

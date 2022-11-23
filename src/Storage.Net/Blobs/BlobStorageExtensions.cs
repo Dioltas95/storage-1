@@ -433,18 +433,6 @@ namespace Storage.Net.Blobs
          }
          else
          {
-            //this needs to be done recursively
-            foreach(Blob item in await blobStorage.ListAsync(oldPath, recurse: true).ConfigureAwait(false))
-            {
-               if(item.IsFile)
-               {
-                  string renamedPath = item.FullPath.Replace(oldPath, newPath);
-
-                  await blobStorage.CopyToAsync(item, blobStorage, renamedPath, cancellationToken).ConfigureAwait(false);
-                  await blobStorage.DeleteAsync(item, cancellationToken).ConfigureAwait(false);
-               }
-            }
-
             //rename self
             await blobStorage.CopyToAsync(oldPath, blobStorage, newPath, cancellationToken).ConfigureAwait(false);
             await blobStorage.DeleteAsync(oldPath, cancellationToken).ConfigureAwait(false);
@@ -453,9 +441,31 @@ namespace Storage.Net.Blobs
 
       }
 
-#endregion
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="blobStorage"></param>
+      /// <param name="oldPath"></param>
+      /// <param name="newPath"></param>
+      /// <param name="cancellationToken"></param>
+      /// <returns></returns>
+      /// <exception cref="ArgumentNullException"></exception>
+      public static async Task MoveFileAsync(this IBlobStorage blobStorage,
+   string oldPath, string newPath, CancellationToken cancellationToken = default)
+      {
+         if(oldPath is null)
+            throw new ArgumentNullException(nameof(oldPath));
+         if(newPath is null)
+            throw new ArgumentNullException(nameof(newPath));
 
-#region [ Folders ]
+         await blobStorage.MoveFileFluentAsync(oldPath, newPath);
+
+
+      }
+
+      #endregion
+
+      #region [ Folders ]
 
       /// <summary>
       /// Creates a new folder in this storage. If storage supports hierarchy, the folder is created as is, otherwise a folder is created by putting a dummy zero size file in that folder.

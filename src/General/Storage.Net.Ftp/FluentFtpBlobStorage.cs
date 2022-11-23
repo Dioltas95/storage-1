@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentFTP;
@@ -70,6 +71,11 @@ namespace Storage.Net.Ftp
                continue;
             }
 
+            if(item.Type == FtpFileSystemObjectType.File && Regex.Matches(item.FullName, Path.GetFileName(options.FolderPath)).Count >= 2)
+            {
+               item.FullName = item.FullName.Substring(0, item.FullName.LastIndexOf("/"));
+            }
+
             Blob blob = ToBlobId(item);
             if (blob == null) continue;
 
@@ -85,6 +91,15 @@ namespace Storage.Net.Ftp
          }
 
          return results;
+      }
+
+      public async Task<bool> MoveFileFluentAsync(string oldPath, string newPath, CancellationToken cancellationToken = default)
+      {
+         FtpClient client = await GetClientAsync().ConfigureAwait(false);
+
+         bool test = await client.MoveFileAsync(oldPath, newPath);
+
+         return test;
       }
 
       private Blob ToBlobId(FtpListItem ff)
