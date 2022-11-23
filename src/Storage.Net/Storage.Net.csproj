@@ -31,4 +31,7 @@
       <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
       <PackageReference Include="System.Text.Json" Version="4.7.0" />
    </ItemGroup>
+   <ItemGroup>
+      <None Include="..\storage.png" CopyToOutputDirectory="Always" Pack="true" PackagePath="\" />
+   </ItemGroup>
 </Project>
