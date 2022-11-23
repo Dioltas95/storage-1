@@ -51,8 +51,16 @@ namespace Storage.Net.Ftp
          FtpClient client = await GetClientAsync().ConfigureAwait(false);
 
          if (options == null) options = new ListOptions();
-
-         FtpListItem[] items = await client.GetListingAsync(options.FolderPath).ConfigureAwait(false);
+         FtpListItem[] items;
+         if(options.Recurse)
+         {
+            items = await client.GetListingAsync(options.FolderPath, FtpListOption.Recursive).ConfigureAwait(false);
+         }
+         else
+         {
+            items = await client.GetListingAsync(options.FolderPath).ConfigureAwait(false);
+         }
+        
 
          var results = new List<Blob>();
          foreach(FtpListItem item in items)

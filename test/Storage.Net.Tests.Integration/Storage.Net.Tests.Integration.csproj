@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\src\GCP\Storage.Net.Gcp.CloudStorage\Storage.Net.Gcp.CloudStorage.csproj" />
     <ProjectReference Include="..\..\src\General\Storage.Net.Databricks\Databricks.csproj" />
     <ProjectReference Include="..\..\src\General\Storage.Net.Ftp\Storage.Net.Ftp.csproj" />
+    <ProjectReference Include="..\..\src\General\Storage.Net.Sftp\Storage.Net.Sftp.csproj" />
     <ProjectReference Include="..\..\src\Storage.Net\Storage.Net.csproj" />
     <ProjectReference Include="..\..\src\AWS\Storage.Net.Amazon.Aws\Storage.Net.Amazon.Aws.csproj" />
   </ItemGroup>
